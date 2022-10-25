@@ -1,0 +1,15 @@
+{
+  "name": "vagablog",
+  "version": "1.0.0",
+  "description": "backend-nodejs-second-semester-examination-(blogging-api)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Zeuhz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

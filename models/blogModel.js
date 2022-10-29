@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const blogSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, "Please give blog title."],
+    required: [true, 'Please give blog title.'],
     unique: true,
   },
   description: {
@@ -17,12 +17,12 @@ const blogSchema = new mongoose.Schema({
   },
   author: {
     type: mongoose.Schema.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
   state: {
     type: String,
-    enum: ["draft", "published"],
-    default: "draft",
+    enum: ['draft', 'published'],
+    default: 'draft',
   },
   read_count: {
     type: Number,
@@ -34,7 +34,7 @@ const blogSchema = new mongoose.Schema({
   },
   body: {
     type: String,
-    required: [true, "A blog must have a body."],
+    required: [true, 'A blog must have a body.'],
     minlength: 50,
     maxlength: 200,
   },
@@ -44,5 +44,20 @@ const blogSchema = new mongoose.Schema({
   },
 });
 
-const Blog = mongoose.model("Blog", blogSchema);
+blogSchema.pre('save', function (next) {
+  this.read_count = this.read_count + 1;
+  next();
+});
+
+blogSchema.pre(/\b(find)\b/, function (next) {
+  this.find({ state: 'published' });
+  next();
+});
+
+blogSchema.pre(/^find/, function (next) {
+  this.populate({ path: 'author' });
+  next();
+});
+
+const Blog = mongoose.model('Blog', blogSchema);
 module.exports = Blog;

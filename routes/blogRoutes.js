@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const blogController = require('../controller/blogController');
+const authController = require('../controller/authController');
 
 const router = express.Router();
 
@@ -9,6 +10,7 @@ router
   .get(blogController.getAllBlogs)
   .post(
     passport.authenticate('jwt', { session: false }),
+    authController.restrictTo('user'),
     blogController.createBlog
   );
 
@@ -18,16 +20,25 @@ router
     passport.authenticate('jwt', { session: false }),
     blogController.getMyBlogs
   );
+router
+  .route('/myBlogs/:id')
+  .patch(
+    passport.authenticate('jwt', { session: false }),
+    authController.verifyCurrentUserAction,
+    blogController.updateMyBlog
+  )
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    authController.verifyCurrentUserAction,
+    blogController.deleteMyBlog
+  );
 
 router
   .route('/:id')
   .get(blogController.getBlog)
-  .patch(
-    passport.authenticate('jwt', { session: false }),
-    blogController.updateBlog
-  )
   .delete(
     passport.authenticate('jwt', { session: false }),
+    authController.restrictTo('admin'),
     blogController.deleteBlog
   );
 

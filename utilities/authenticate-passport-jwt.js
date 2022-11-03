@@ -13,8 +13,9 @@ passport.use(
     },
     async (req, token, done) => {
       try {
-        req.user = token.user;
-        done(null, token.user);
+        const currentUser = await User.findById(token.user._id);
+        req.user = currentUser;
+        done(null, req.user);
       } catch (err) {
         done(err);
       }
@@ -35,10 +36,10 @@ passport.use(
         const user = await User.create({
           first_name: req.body.first_name,
           last_name: req.body.last_name,
+          role: req.body.role,
           email,
           password,
         });
-        console.log(user);
         return done(null, user);
       } catch (error) {
         return done(error);

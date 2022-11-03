@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
+const User = require('../models/userModel');
 
 const blogSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, 'Please give blog title.'],
     unique: true,
+    lowercase: true,
   },
   description: {
     type: String,
@@ -14,11 +16,13 @@ const blogSchema = new mongoose.Schema({
   tags: {
     type: String,
     minlength: 1,
+    lowercase: true,
   },
   author: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
   },
+  authorInfo: String,
   state: {
     type: String,
     enum: ['draft', 'published'],
@@ -29,14 +33,13 @@ const blogSchema = new mongoose.Schema({
     default: 0,
   },
   reading_time: {
-    type: Date,
-    default: Date.now().getTime,
+    type: String,
+    trim: true,
   },
   body: {
     type: String,
     required: [true, 'A blog must have a body.'],
     minlength: 50,
-    maxlength: 200,
   },
   timestamp: {
     type: Date,
@@ -44,18 +47,24 @@ const blogSchema = new mongoose.Schema({
   },
 });
 
-blogSchema.pre('save', function (next) {
-  this.read_count = this.read_count + 1;
-  next();
-});
-
-blogSchema.pre(/\b(find)\b/, function (next) {
-  this.find({ state: 'published' });
-  next();
-});
-
 blogSchema.pre(/^find/, function (next) {
   this.populate({ path: 'author' });
+  next();
+});
+
+blogSchema.pre('save', async function (next) {
+  const user = await User.findById(this.author);
+  this.authorInfo = user.first_name + user.last_name;
+  next();
+});
+
+blogSchema.pre('save', function (next) {
+  const avgReadingTime = 150;
+  const blogWords = this.body.split(' ');
+  let totalNumWords = 0;
+  blogWords.forEach((word) => totalNumWords++);
+  this.reading_time = `${Math.ceil(totalNumWords / avgReadingTime)} mins`;
+  console.log(this.reading_time, totalNumWords);
   next();
 });
 

@@ -27,6 +27,80 @@ This is an API for a Blogging App.
 - Come up with any algorithm for calculating the reading_time of the blog.
 - Write tests for all endpoints
 
+## Setup
+
+- Install NodeJS, mongodb
+- pull this repo
+- update `env` with example.env
+- run `npm run start:dev`
+
+---
+
+## Base URL
+
+### User
+
+| field      | data_type | constraints                                      |
+| ---------- | --------- | ------------------------------------------------ |
+| id         | string    | required                                         |
+| first_name | string    | required                                         |
+| last_name  | string    | required                                         |
+| full_name  | string    | optional                                         |
+| email      | string    | required                                         |
+| password   | string    | required                                         |
+| role       | string    | optional, default: user, enum: ['user', 'admin'] |
+
+### Blog
+
+| field        | data_type | constraints                                             |
+| ------------ | --------- | ------------------------------------------------------- |
+| id           | string    | required                                                |
+| timestamp    | date      | required                                                |
+| title        | string    | required                                                |
+| description  | string    | optional                                                |
+| tags         | array     | optional                                                |
+| author       | ref       | required                                                |
+| body         | string    | required                                                |
+| read_count   | number    | optional, default: 0                                    |
+| reading_time | string    | optional,                                               |
+| state        | string    | required, enum default: 'draft', ['draft', 'published'] |
+
+### Signup User
+
+- Route: /signup
+- Method: POST
+- Body:
+
+```JavaScript
+{
+    "first_name":"John",
+    "last_name":"Dickson",
+    "email":"dickson@yahoo.com",
+    "password": "diskcon627",
+    "role": "user"
+}
+```
+
+- Responses
+
+Success
+
+```JavaScript
+{
+    "status": "success",
+    "data": {
+        "user": {
+            "first_name": "John",
+            "last_name": "Dickson",
+            "email": "dickson@yahoo.com",
+            "role": "user",
+            "_id": "63652ebfb1dca37cdb7f5f0a",
+            "full_name": "john dickson",
+        }
+    }
+}
+```
+
 ## API TESTING
 
 This includes functions used to test the API routes/endpoints,
@@ -39,7 +113,7 @@ const auth = {};
 
 ```
 
-- Redirect into the test\integration folder and run this code in the terminal.
+- change into the test\integration folder using `cd <filename\child_file>` and run this code in the terminal.
 
 ```
     npm run test apiRoutes.test.js

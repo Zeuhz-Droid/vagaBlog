@@ -45,7 +45,12 @@ exports.logIn = async (req, res, next) => {
 };
 
 exports.signUp = async (req, res, next) => {
-  createSendToken(req.user, 201, res);
+  res.status(201).json({
+    status: 'success',
+    data: {
+      user: req.user,
+    },
+  });
 };
 
 exports.restrictTo =

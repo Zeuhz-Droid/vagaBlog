@@ -20,6 +20,7 @@ router
     passport.authenticate('jwt', { session: false }),
     blogController.getMyBlogs
   );
+
 router
   .route('/myBlogs/:id')
   .patch(

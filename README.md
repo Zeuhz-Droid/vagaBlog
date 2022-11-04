@@ -67,7 +67,7 @@ This is an API for a Blogging App.
 
 ### Signup User
 
-- Route: /signup
+- Route: /api/v1/users/signup
 - Method: POST
 - Body:
 
@@ -100,6 +100,134 @@ Success
     }
 }
 ```
+
+---
+
+### Login User
+
+- Route: /api/v1/users/login
+- Method: POST
+- Body:
+
+```JavaScript
+{
+  "email": "dickson@yahoo.com",
+  "password": 'diskcon627',
+}
+```
+
+- Responses
+
+Success
+
+```JavaScript
+{
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Ij...",
+    "data": {
+        "user": {
+            "first_name": "John",
+            "last_name": "Dickson",
+            "email": "dickson@yahoo.com",
+            "role": "user",
+            "full_name": "john dickson",
+        }
+    }
+}
+```
+
+### Get All Blogs
+
+- Route: /api/v1/blogs
+- Method: GET
+- Body:
+
+- Header:
+  - Authorization: Bearer {token}
+- Query params:
+
+  - page (default: 1)
+  - per_page (default: 20)
+  - search by (options: tags | author | title)
+  - order_by (default: read_count reading_time timestamp)
+  - order (options: asc | desc, default: desc)
+  - state
+
+- Responses
+
+Success
+
+```JavaScript
+[
+    {
+        "_id": "63652d587aa3ed6f5c8ac4af",
+        "title": "Saponification: Production of Soap",
+        "description": "Production of benzene from the mixture of H2, CH4 and toluene",
+        "tags": [
+            "chemistry",
+            "organic compound",
+            "chemical compound"
+        ],
+        "author": {
+            "_id": "63652c017aa3ed6f5c8ac4a5",
+            "email": "jane@doe.io",
+            "role": "user",
+            "full_name": "jane doe"
+        },
+        "state": "published",
+        "read_count": 5,
+        "body": "Saponification is a process that involves the conversion of fat, oil, or lipid, into soap and...",
+        "timestamp": "2022-11-04T15:12:10.960Z",
+        "authorInfo": "Jane Doe",
+        "reading_time": "2 mins",
+    }
+]
+```
+
+### Get A Blog
+
+- Route: /api/v1/blogs/id
+- Method: POST
+- Body:
+
+- Header:
+  - Authorization: Bearer {token}
+- Query params:
+
+  - search by (id)
+  - state (default: published)
+  - timestamp
+
+- Responses
+
+Success
+
+```JavaScript
+{
+    "_id": "63652b25e3fcbf87f4d90210",
+    "title": "Gentridue Indulgence",
+    "description": "Making AI in the lightest means can be considered deadly in the long run because...",
+    "tags": [
+        "Artificial Intelligence",
+        "soft AI",
+        "hard AI"
+    ],
+    "author": {
+        "_id": "63652a9fe3fcbf87f4d90208",
+        "email": "john@doe.io",
+        "role": "user",
+        "full_name": "john doe"
+    },
+    "state": "published",
+    "read_count": 1,
+    "body": "Denote simple fat denied add worthy little use. As some he so high down am week...",
+    "timestamp": "2022-11-04T15:06:12.028Z",
+    "authorInfo": "John Doe",
+    "reading_time": "1 mins",
+}
+```
+
+<!-- NA HERE YOU DEY, YOU DEY WRITE THE FIELDS WEY PLAUSIBLE, COPY FROM GITHUB, AND ALSO CORRECT SIGNUP USER WEY DEY SEND TOKEN -->
 
 ## API TESTING
 

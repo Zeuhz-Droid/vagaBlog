@@ -41,4 +41,6 @@ const auth = {};
 
 - Redirect into the test\integration folder and run this code in the terminal.
 
-`npm run test apiRoutes.test.js`
+```
+    npm run test apiRoutes.test.js
+```

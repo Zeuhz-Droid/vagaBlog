@@ -12,8 +12,7 @@ const blogSchema = new mongoose.Schema({
     maxlength: 140,
   },
   tags: {
-    type: String,
-    minlength: 1,
+    type: Array,
     lowercase: true,
   },
   author: {
@@ -46,13 +45,13 @@ const blogSchema = new mongoose.Schema({
 });
 
 blogSchema.pre(/^find/, function (next) {
-  this.populate({ path: 'author' });
+  this.populate({ path: 'author', select: 'email full_name role' });
   next();
 });
 
 blogSchema.pre('save', async function (next) {
   const user = await User.findById(this.author);
-  this.authorInfo = user.first_name + user.last_name;
+  this.authorInfo = `${user.first_name} ${user.last_name}`;
   next();
 });
 

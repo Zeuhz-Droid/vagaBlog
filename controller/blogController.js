@@ -32,7 +32,7 @@ exports.createBlog = catchAsync(async (req, res, next) => {
 
   const newBlog = await Blog.create({ ...req.body, state: 'draft' });
 
-  res.status(200).json({
+  res.status(201).json({
     status: 'success',
     data: {
       blog: newBlog,
@@ -97,16 +97,6 @@ exports.getMyBlogs = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteMyBlog = catchAsync(async (req, res, next) => {
-  await Blog.deleteOne({ _id: req.params.id });
-
-  res.status(200).json({
-    status: 'success',
-    message: `${req.blog.title}, Deleted!`,
-    data: null,
-  });
-});
-
 exports.updateMyBlog = catchAsync(async (req, res, next) => {
   const userBlog = req.blog;
   if (
@@ -129,5 +119,15 @@ exports.updateMyBlog = catchAsync(async (req, res, next) => {
     data: {
       blog: userBlog,
     },
+  });
+});
+
+exports.deleteMyBlog = catchAsync(async (req, res, next) => {
+  await Blog.deleteOne({ _id: req.params.id });
+
+  res.status(204).json({
+    status: 'success',
+    message: `${req.blog.title}, Deleted!`,
+    data: null,
   });
 });

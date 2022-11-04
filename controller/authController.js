@@ -52,7 +52,6 @@ exports.restrictTo =
   (...roles) =>
   (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      console.log(req.originalUrl, req.method);
       return next(
         new Error(
           `You don't have permission to perform this operation. ${

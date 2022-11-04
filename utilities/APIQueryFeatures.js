@@ -29,10 +29,14 @@ class APIQueryFeatures {
       if (allowedFields.includes(field)) {
         if (this.queryString[field] == 'author') {
           newObj[field] = this.queryString;
-        } else {
+        }
+        if (this.queryString[field] == 'title') {
           newObj[field] = {
             $regex: new RegExp('^' + this.queryString[field] + '.*', 'i'),
           };
+        }
+        if (this.queryString[field] == 'tags') {
+          newObj[field] = { $elemMatch: this.queryString.tags };
         }
       }
     });
@@ -60,7 +64,7 @@ class APIQueryFeatures {
       }
       this.query = this.query.sort(sortBy.join(' '));
     } else {
-      this.query = this.query.sort('-read_count -reading_time +timestamp');
+      this.query = this.query.sort('-read_count -reading_time timestamp');
     }
 
     return this;

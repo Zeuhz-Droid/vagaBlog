@@ -6,11 +6,9 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please give blog title.'],
     unique: true,
-    lowercase: true,
   },
   description: {
     type: String,
-    minlength: 50,
     maxlength: 140,
   },
   tags: {
@@ -62,9 +60,8 @@ blogSchema.pre('save', function (next) {
   const avgReadingTime = 150;
   const blogWords = this.body.split(' ');
   let totalNumWords = 0;
-  blogWords.forEach((word) => totalNumWords++);
+  blogWords.forEach(() => totalNumWords++);
   this.reading_time = `${Math.ceil(totalNumWords / avgReadingTime)} mins`;
-  console.log(this.reading_time, totalNumWords);
   next();
 });
 

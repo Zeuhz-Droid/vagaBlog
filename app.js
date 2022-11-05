@@ -12,6 +12,11 @@ const app = express();
 
 require('dotenv').config();
 
+process.on('uncaughtException', (err) => {
+  console.log('UNHANDLED EXCEPTION! 💥 Shutting Down');
+  process.exit(1);
+});
+
 require('./utilities/authenticate-passport-jwt');
 
 if ((process.env.NODE_ENV = 'development')) {
@@ -29,8 +34,16 @@ app.use('*', (req, res, next) => {
 });
 app.use(globalErrorHandler);
 
-app.listen(process.env.PORT, () =>
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () =>
   console.log(`Listening succesfully on PORT: ${process.env.PORT}`)
 );
+
+process.on('unhandledRejection', (err) => {
+  console.log(`UNHANDLED REJECTION!  💥 Shutting Down (${err.statusCode})`);
+  server.close(() => {
+    process.exit(1);
+  });
+});
 
 module.exports = app;

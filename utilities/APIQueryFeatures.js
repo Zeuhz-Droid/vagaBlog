@@ -30,13 +30,12 @@ class APIQueryFeatures {
         if (this.queryString[field] == 'author') {
           newObj[field] = this.queryString;
         }
-        if (this.queryString[field] == 'title') {
+        if (this.queryString[field] == 'tags') {
+          newObj[field] = { $elemMatch: this.queryString.tags };
+        } else if (this.queryString[field]) {
           newObj[field] = {
             $regex: new RegExp('^' + this.queryString[field] + '.*', 'i'),
           };
-        }
-        if (this.queryString[field] == 'tags') {
-          newObj[field] = { $elemMatch: this.queryString.tags };
         }
       }
     });

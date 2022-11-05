@@ -35,8 +35,7 @@ app.use('*', (req, res, next) => {
 app.use(globalErrorHandler);
 
 const PORT = process.env.PORT || 8000;
-const HOST = process.env.HOST || 'localhost';
-app.listen(PORT, HOST, () =>
+app.listen(PORT, () =>
   console.log(`Listening succesfully on PORT: ${process.env.PORT}`)
 );
 

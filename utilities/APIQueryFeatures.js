@@ -63,7 +63,7 @@ class APIQueryFeatures {
       }
       this.query = this.query.sort(sortBy.join(' '));
     } else {
-      this.query = this.query.sort('-read_count -reading_time timestamp');
+      this.query = this.query.sort('-read_count reading_time -timestamp');
     }
 
     return this;

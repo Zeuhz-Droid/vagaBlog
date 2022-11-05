@@ -24,6 +24,10 @@ const auth = {
     { email: 'markings@outlook.io', password: 'yingyang44' },
   ],
 
+  //*NOTE */
+  // change this value to select a user above; 0 selects John, 1 selects Jane, 2 selects markings and so on
+  loginValue: 0,
+
   // CREATE A BLOG endpoint - You can fill out all fields as you please, put the ones with (!important) tags has to be different everytime you run the script/file
   createABlog: {
     title: 'Removing Dirt from the Enviroment',
@@ -99,7 +103,10 @@ describe('user routes', () => {
 describe('blog routes', () => {
   it(
     'login',
-    loginUser(auth.loginOptions[0].email, auth.loginOptions[0].password)
+    loginUser(
+      auth.loginOptions[auth.loginValue].email,
+      auth.loginOptions[auth.loginValue].password
+    )
   );
 
   it('get all blogs', async () => {

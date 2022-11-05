@@ -25,12 +25,10 @@ router
   .route('/myBlogs/:id')
   .patch(
     passport.authenticate('jwt', { session: false }),
-    authController.verifyCurrentUserAction,
     blogController.updateMyBlog
   )
   .delete(
     passport.authenticate('jwt', { session: false }),
-    authController.verifyCurrentUserAction,
     blogController.deleteMyBlog
   );
 

@@ -6,6 +6,25 @@ const increaseCount = (count) => {
   return ++count;
 };
 
+const extractId = (id) => `${id}`.split('"')[0];
+
+const verifyCurrentUserAction = catchAsync(async (req, res, next) => {
+  const userBlog = await Blog.findById(req.params.id);
+
+  if (!userBlog) {
+    return next(new Error('No blog Found with this id'));
+  }
+
+  const userId = extractId(req.user._id);
+  const authorId = extractId(userBlog.author?._id);
+
+  if (userId !== authorId) {
+    return next(new Error('You do NOT have permission to perform this action'));
+  }
+
+  return userBlog;
+});
+
 exports.getAllBlogs = catchAsync(async (req, res, next) => {
   const features = new APIQueryFeatures(
     Blog.find({ state: 'published' }),
@@ -98,7 +117,7 @@ exports.getMyBlogs = catchAsync(async (req, res, next) => {
 });
 
 exports.updateMyBlog = catchAsync(async (req, res, next) => {
-  const userBlog = req.blog;
+  const userBlog = await verifyCurrentUserAction(req, res, next);
   if (
     req.body.state &&
     req.body.state !== 'published' &&
@@ -123,11 +142,12 @@ exports.updateMyBlog = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteMyBlog = catchAsync(async (req, res, next) => {
-  await Blog.deleteOne({ _id: req.params.id });
+  const userBlog = await verifyCurrentUserAction(req, res, next);
+  if (userBlog) await Blog.deleteOne({ _id: req.params.id });
 
   res.status(204).json({
     status: 'success',
-    message: `${req.blog.title}, Deleted!`,
+    message: `${userBlog.title}, Deleted!`,
     data: null,
   });
 });

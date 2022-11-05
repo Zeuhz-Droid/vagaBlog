@@ -4,12 +4,14 @@
   "description": "backend-nodejs-second-semester-examination-(blogging-api)",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "start:dev": "NODE_ENV=development nodemon app.js",
     "start:prod": "NODE_ENV=production nodemon app.js",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --coverage"
   },
   "keywords": [],
-  "author": "Zeuhz",
+  "author": "Zeuhz Droid(David A.)",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

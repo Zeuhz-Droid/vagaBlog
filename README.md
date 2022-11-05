@@ -411,4 +411,4 @@ const auth = {};
 
 ## Contributor
 
-- Adegbiran-Ayinoluwa David
+- Zeuhz Droid(David A.)

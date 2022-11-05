@@ -28,6 +28,8 @@ const auth = {
     { email: 'markings@outlook.io', password: 'yingyang44' },
   ],
 
+  // any users ID , this will be consumed by an endpoint available for only admins to delete any user's blog (on grounds of policy violation)
+  anyId: 'fill an users ID here',
   // CREATE A BLOG endpoint - You can fill out all fields as you please, put the ones with (!important) tags has to be different everytime you run the script/file
   createABlog: {
     title: 'Removing Dirt from the Enviroment',
@@ -97,6 +99,15 @@ describe('user routes', () => {
 
     expect(res.statusCode).toEqual(200);
     expect(Array.isArray(res.body.data.users)).toBe(true);
+  });
+
+  it('delete any blog', async () => {
+    const res = await supertest(app)
+      .delete(`/api/v1/blogs/${auth.anyId}`)
+      .set('Authorization', `Bearer ${auth.token}`);
+
+    expect(res.statusCode).toEqual(204);
+    expect(res.body.data).toBe(undefined);
   });
 });
 

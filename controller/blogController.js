@@ -85,7 +85,7 @@ exports.deleteBlog = catchAsync(async (req, res, next) => {
     return next(new Error('No blog Found with this id'));
   }
 
-  res.status(200).json({
+  res.status(204).json({
     status: 'success',
     message: `${blog.title}, Deleted!`,
     data: null,

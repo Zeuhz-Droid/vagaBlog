@@ -144,12 +144,12 @@ Success
 
 - Query params:
 
+  - state (published)
   - page (default: 1)
   - per_page (default: 20)
   - search by (options: tags | author | title)
   - order_by (default: read_count reading_time timestamp)
   - order (options: asc | desc, default: desc)
-  - state
 
 - Responses
 
@@ -157,6 +157,7 @@ Success
 
 ```JavaScript
 [
+    {Object 1},
     {
         "_id": "63652d587aa3ed6f5c8ac4af",
         "title": "Saponification: Production of Soap",
@@ -178,7 +179,9 @@ Success
         "timestamp": "2022-11-04T15:12:10.960Z",
         "authorInfo": "Jane Doe",
         "reading_time": "2 mins",
-    }
+    },
+    {Object 3},
+    ...otherObjects
 ]
 ```
 
@@ -191,7 +194,7 @@ Success
 - Query params:
 
   - search by (id)
-  - state (default: published)
+  - state (published)
   - timestamp
 
 - Responses
@@ -240,8 +243,8 @@ Success
 
 - Header:
   - Authorization: Bearer {token}
-- Query params:
-  - null
+- Query params: nil
+
 - Responses
 
 Success
@@ -262,7 +265,7 @@ Success
     "timestamp": "2022-11-04T15:39:14.470Z",
     "_id": "6365328c8ffc71a75f0fa9d3",
     "authorInfo": "John Dickson",
-    "reading_time": "1 mins",
+    "reading_time": "3 mins",
 }
 ```
 
@@ -291,12 +294,8 @@ Success
         "title": "Gentridue Indulgence",
         "description": "Making AI in the lightest means can be considered deadly in the long run because...",
         "tags": [
-            "Artificial Intelligence",
-            "soft AI",
-            "hard AI"
-        ],
+            "Artificial Intelligence","soft AI", "hard AI" ],
         "author": {
-            "_id": "63652a9fe3fcbf87f4d90208",
             "email": "john@doe.io",
             "role": "user",
             "full_name": "john doe"
@@ -312,14 +311,8 @@ Success
     {
         "title": "Piano playing is in",
         "description": "A big part of wood making is the art of usoing a nails is getting set up with the basics that involve the partitioning...",
-        "tags": [
-            "music",
-            "piano",
-            "instrument",
-            "sound"
-        ],
+        "tags": ["music", "piano","instrument", "sound"],
         "author": {
-            "_id": "63652a9fe3fcbf87f4d90208",
             "email": "john@doe.io",
             "role": "user",
             "full_name": "john doe"
@@ -332,6 +325,51 @@ Success
         "reading_time": "1 mins",
     }
 ]
+```
+
+### Update My Blog
+
+- Route: /api/v1/blogs/myBlogs/:id
+- Method: GET
+- Body:
+
+```JavaScript
+{
+    "state" : "published",
+}
+```
+
+- Header:
+
+  - Authorization: Bearer {token}
+
+- Query params:
+
+  - id
+  - state (options: draft | published)
+
+- Responses
+
+Success
+
+```Javascript
+{
+    "_id": "63652b80e3fcbf87f4d90219",
+    "title": "Piano playing is in",
+    "description": "A big part of wood making is the art of usoing a nails is getting set up with the basics that involve the partitioning...",
+    "tags": ["music", "piano","instrument", "sound"],
+    "author": {
+        "email": "john@doe.io",
+        "role": "user",
+        "full_name": "john doe"
+    },
+    "state": "published",
+    "read_count": 0,
+    "body": "Denote simple fat denied add worthy little use. As some he so high down am week. Conduct esteems by cottage...",
+    "timestamp": "2022-11-04T15:06:12.028Z",
+    "authorInfo": "John Doe",
+    "reading_time": "1 mins",
+}
 ```
 
 <!-- NA HERE YOU DEY, YOU DEY WRITE THE FIELDS WEY PLAUSIBLE, COPY FROM GITHUB, AND ALSO CORRECT SIGNUP USER WEY DEY SEND TOKEN -->

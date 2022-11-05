@@ -14,19 +14,19 @@ const auth = {
     first_name: 'fill a first name here',
     last_name: 'fill a last name here',
     email: 'fill an email here',
-    password: 'fill a password here',
+    password: 'fill an password here',
   },
 
   // FOR LOGIN endpoint
+  //*NOTE */
+  // change this value to select a user in the login options below; 0 selects John, 1 selects Jane, 2 selects markings and so on
+  loginValue: 0,
+
   loginOptions: [
-    { email: 'john@doe.io', password: 'culbreg78' },
-    { email: 'jane@doe.io', password: 'cryonics1#' },
+    { email: 'john@doe.io', password: 'johndoepassword' },
+    { email: 'jane@doe.io', password: 'janedoepassword' },
     { email: 'markings@outlook.io', password: 'yingyang44' },
   ],
-
-  //*NOTE */
-  // change this value to select a user above; 0 selects John, 1 selects Jane, 2 selects markings and so on
-  loginValue: 0,
 
   // CREATE A BLOG endpoint - You can fill out all fields as you please, put the ones with (!important) tags has to be different everytime you run the script/file
   createABlog: {
@@ -88,7 +88,7 @@ describe('user routes', () => {
     expect(res.body.data.user.role).toBe('admin');
   });
 
-  it('login', loginUser(auth.sigup_email, auth.signup_password));
+  it('login', loginUser(auth.signupOtions.email, auth.signupOtions.password));
 
   it('get all users', async () => {
     const res = await supertest(app)

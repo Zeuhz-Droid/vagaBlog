@@ -156,33 +156,39 @@ Success
 Success
 
 ```JavaScript
-[
-    {Object 1},
-    {
-        "_id": "63652d587aa3ed6f5c8ac4af",
-        "title": "Saponification: Production of Soap",
-        "description": "Production of benzene from the mixture of H2, CH4 and toluene",
-        "tags": [
-            "chemistry",
-            "organic compound",
-            "chemical compound"
-        ],
-        "author": {
-            "_id": "63652c017aa3ed6f5c8ac4a5",
-            "email": "jane@doe.io",
-            "role": "user",
-            "full_name": "jane doe"
-        },
-        "state": "published",
-        "read_count": 5,
-        "body": "Saponification is a process that involves the conversion of fat, oil, or lipid, into soap and...",
-        "timestamp": "2022-11-04T15:12:10.960Z",
-        "authorInfo": "Jane Doe",
-        "reading_time": "2 mins",
+{
+    "status": "success",
+    "results": 4,
+    "data": {
+      "blogs": [
+            {Object 1},
+            {
+            "_id": "63652d587aa3ed6f5c8ac4af",
+            "title": "Saponification: Production of Soap",
+            "description": "Production of benzene from the mixture of H2, CH4 and toluene",
+            "tags": [
+                "chemistry",
+                "organic compound",
+                "chemical compound"
+            ],
+            "author": {
+                "_id": "63652c017aa3ed6f5c8ac4a5",
+                "email": "jane@doe.io",
+                "role": "user",
+                "full_name": "jane doe"
+            },
+            "state": "published",
+            "read_count": 5,
+            "body": "Saponification is a process that involves the conversion of fat, oil, or lipid, into soap and...",
+            "timestamp": "2022-11-04T15:12:10.960Z",
+            "authorInfo": "Jane Doe",
+            "reading_time": "2 mins",
+            },
+            {Object 3},
+            {Object 4},
+      ]
     },
-    {Object 3},
-    ...otherObjects
-]
+}
 ```
 
 ### Get A Blog
@@ -203,26 +209,28 @@ Success
 
 ```JavaScript
 {
-    "_id": "63652b25e3fcbf87f4d90210",
-    "title": "Gentridue Indulgence",
-    "description": "Making AI in the lightest means can be considered deadly in the long run because...",
-    "tags": [
-        "Artificial Intelligence",
-        "soft AI",
-        "hard AI"
-    ],
-    "author": {
-        "_id": "63652a9fe3fcbf87f4d90208",
-        "email": "john@doe.io",
-        "role": "user",
-        "full_name": "john doe"
+    "status": "success",
+    "data": {
+      "blog": {
+         "_id": "63652b25e3fcbf87f4d90210",
+        "title": "Gentridue Indulgence",
+        "description": "Making AI in the lightest means can be considered deadly in the long run because...",
+        "tags": ["Artificial Intelligence","soft AI","hard AI"],
+        "author": {
+            "_id": "63652a9fe3fcbf87f4d90208",
+            "email": "john@doe.io",
+            "role": "user",
+            "full_name": "john doe"
+        },
+        "state": "published",
+        "read_count": 1,
+        "body": "Denote simple fat denied add worthy little use. As some he so high down am week...",
+        "timestamp": "2022-11-04T15:06:12.028Z",
+        "authorInfo": "John Doe",
+        "reading_time": "1 mins",
+      }
     },
-    "state": "published",
-    "read_count": 1,
-    "body": "Denote simple fat denied add worthy little use. As some he so high down am week...",
-    "timestamp": "2022-11-04T15:06:12.028Z",
-    "authorInfo": "John Doe",
-    "reading_time": "1 mins",
+
 }
 ```
 
@@ -251,21 +259,22 @@ Success
 
 ```JavaScript
 {
-    "title": "Ring light in the dark",
-    "description": "Production of paper from wood e.g softwood or hardwood",
-    "tags": [
-        "paper",
-        "pulp",
-        "chemical compound"
-    ],
-    "author": "63652ebfb1dca37cdb7f5f0a",
-    "state": "draft",
-    "read_count": 0,
-    "body": "Lorem Ipsum comes from a latin text written in 45BC by Roman statesman, lawyer, scholar...",
-    "timestamp": "2022-11-04T15:39:14.470Z",
-    "_id": "6365328c8ffc71a75f0fa9d3",
-    "authorInfo": "John Dickson",
-    "reading_time": "3 mins",
+    "status": "success",
+    "data": {
+        'blog': {
+            "title": "Ring light in the dark",
+            "description": "Production of paper from wood e.g softwood or hardwood",
+            "tags": ["paper","pulp","chemical compound"],
+            "author": "63652ebfb1dca37cdb7f5f0a",
+            "state": "draft",
+            "read_count": 0,
+            "body": "Lorem Ipsum comes from a latin text written in 45BC by Roman statesman, lawyer, scholar...",
+            "timestamp": "2022-11-04T15:39:14.470Z",
+            "_id": "6365328c8ffc71a75f0fa9d3",
+            "authorInfo": "John Dickson",
+            "reading_time": "3 mins",
+        }
+    }
 }
 ```
 
@@ -288,54 +297,32 @@ Success
 Success
 
 ```JavaScript
-[
-    {Object 1},
-    {
-        "title": "Gentridue Indulgence",
-        "description": "Making AI in the lightest means can be considered deadly in the long run because...",
-        "tags": [
-            "Artificial Intelligence","soft AI", "hard AI" ],
-        "author": {
-            "email": "john@doe.io",
-            "role": "user",
-            "full_name": "john doe"
+{
+    "status": 'success',
+    "results": 4,
+    "data": {
+        "blogs": {
+            {Object 1},
+            {Object 2},
+            {Object 3},
+            {Object 4},
         },
-        "state": "published",
-        "read_count": 1,
-        "body": "Denote simple fat denied add worthy little use. As some he so high down am week...",
-        "timestamp": "2022-11-04T15:06:12.028Z",
-        "authorInfo": "John Doe",
-        "reading_time": "1 mins",
-    },
-    {Object 3},
-    {
-        "title": "Piano playing is in",
-        "description": "A big part of wood making is the art of usoing a nails is getting set up with the basics that involve the partitioning...",
-        "tags": ["music", "piano","instrument", "sound"],
-        "author": {
-            "email": "john@doe.io",
-            "role": "user",
-            "full_name": "john doe"
-        },
-        "state": "draft",
-        "read_count": 0,
-        "body": "Denote simple fat denied add worthy little use. As some he so high down am week. Conduct esteems by cottage...",
-        "timestamp": "2022-11-04T15:06:12.028Z",
-        "authorInfo": "John Doe",
-        "reading_time": "1 mins",
     }
-]
+}
+
 ```
 
 ### Update My Blog
 
 - Route: /api/v1/blogs/myBlogs/:id
-- Method: GET
+- Method: PATCH
 - Body:
 
 ```JavaScript
 {
     "state" : "published",
+    "title" : "Piano: Instrument of geniuses",
+
 }
 ```
 
@@ -354,25 +341,55 @@ Success
 
 ```Javascript
 {
-    "_id": "63652b80e3fcbf87f4d90219",
-    "title": "Piano playing is in",
-    "description": "A big part of wood making is the art of usoing a nails is getting set up with the basics that involve the partitioning...",
-    "tags": ["music", "piano","instrument", "sound"],
-    "author": {
-        "email": "john@doe.io",
-        "role": "user",
-        "full_name": "john doe"
+    "status": "success",
+    "data": {
+      "blog": {
+        "_id": "63652b80e3fcbf87f4d90219",
+        "title": "Piano: Instrument of geniuses",
+        "description": "A big part of wood making is the art of using a nails is getting set up with the basics that involve the partitioning...",
+        "tags": ["music", "piano","instrument", "sound"],
+        "author": {
+            "email": "john@doe.io",
+            "role": "user",
+            "full_name": "john doe"
+        },
+        "state": "published",
+        "read_count": 0,
+        "body": "Denote simple fat denied add worthy little use. As some he so high down am week. Conduct esteems by cottage...",
+        "timestamp": "2022-11-04T15:06:12.028Z",
+        "authorInfo": "John Doe",
+        "reading_time": "1 mins",
+      }
     },
-    "state": "published",
-    "read_count": 0,
-    "body": "Denote simple fat denied add worthy little use. As some he so high down am week. Conduct esteems by cottage...",
-    "timestamp": "2022-11-04T15:06:12.028Z",
-    "authorInfo": "John Doe",
-    "reading_time": "1 mins",
 }
 ```
 
-<!-- NA HERE YOU DEY, YOU DEY WRITE THE FIELDS WEY PLAUSIBLE, COPY FROM GITHUB, AND ALSO CORRECT SIGNUP USER WEY DEY SEND TOKEN -->
+### Delete My Blog
+
+- Route: /api/v1/blogs/myBlogs/:id
+- Method: DELETE
+- Body:
+
+- Header:
+
+  - Authorization: Bearer {token}
+
+- Query params:
+
+  - id
+  - state (options: draft | published)
+
+- Responses
+
+Success
+
+```Javascript
+{
+    "status": "success",
+    "message": `${blog.title}, Deleted!`,
+    "data": null,
+}
+```
 
 ## API TESTING
 
@@ -391,3 +408,7 @@ const auth = {};
 ```
     npm run test apiRoutes.test.js
 ```
+
+## Contributor
+
+- Adegbiran-Ayinoluwa David

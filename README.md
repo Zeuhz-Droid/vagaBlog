@@ -142,8 +142,6 @@ Success
 - Method: GET
 - Body:
 
-- Header:
-  - Authorization: Bearer {token}
 - Query params:
 
   - page (default: 1)
@@ -186,12 +184,10 @@ Success
 
 ### Get A Blog
 
-- Route: /api/v1/blogs/id
-- Method: POST
+- Route: /api/v1/blogs/:id
+- Method: GET
 - Body:
 
-- Header:
-  - Authorization: Bearer {token}
 - Query params:
 
   - search by (id)
@@ -225,6 +221,117 @@ Success
     "authorInfo": "John Doe",
     "reading_time": "1 mins",
 }
+```
+
+### Create A Blog
+
+- Route: /api/v1/blogs/
+- Method: POST
+- Body:
+
+```JavaScript
+{
+    "title": "Ring light in the dark",
+    "description": "Production of paper from wood e.g softwood or hardwood",
+    "tags": ["paper", "pulp", "chemical compound"],
+    "body": "Lorem Ipsum comes from a latin text written in 45BC by Roman statesman, lawyer, scholar..."
+}
+```
+
+- Header:
+  - Authorization: Bearer {token}
+- Query params:
+  - null
+- Responses
+
+Success
+
+```JavaScript
+{
+    "title": "Ring light in the dark",
+    "description": "Production of paper from wood e.g softwood or hardwood",
+    "tags": [
+        "paper",
+        "pulp",
+        "chemical compound"
+    ],
+    "author": "63652ebfb1dca37cdb7f5f0a",
+    "state": "draft",
+    "read_count": 0,
+    "body": "Lorem Ipsum comes from a latin text written in 45BC by Roman statesman, lawyer, scholar...",
+    "timestamp": "2022-11-04T15:39:14.470Z",
+    "_id": "6365328c8ffc71a75f0fa9d3",
+    "authorInfo": "John Dickson",
+    "reading_time": "1 mins",
+}
+```
+
+### Get My Blogs
+
+- Route: /api/v1/blogs/myBlogs
+- Method: GET
+- Body:
+
+- Header:
+  - Authorization: Bearer {token}
+- Query params:
+
+  - page (default: 1)
+  - per_page (default: 20)
+  - state (options: draft | published)
+
+- Responses
+
+Success
+
+```JavaScript
+[
+    {Object 1},
+    {
+        "title": "Gentridue Indulgence",
+        "description": "Making AI in the lightest means can be considered deadly in the long run because...",
+        "tags": [
+            "Artificial Intelligence",
+            "soft AI",
+            "hard AI"
+        ],
+        "author": {
+            "_id": "63652a9fe3fcbf87f4d90208",
+            "email": "john@doe.io",
+            "role": "user",
+            "full_name": "john doe"
+        },
+        "state": "published",
+        "read_count": 1,
+        "body": "Denote simple fat denied add worthy little use. As some he so high down am week...",
+        "timestamp": "2022-11-04T15:06:12.028Z",
+        "authorInfo": "John Doe",
+        "reading_time": "1 mins",
+    },
+    {Object 3},
+    {
+        "title": "Piano playing is in",
+        "description": "A big part of wood making is the art of usoing a nails is getting set up with the basics that involve the partitioning...",
+        "tags": [
+            "music",
+            "piano",
+            "instrument",
+            "sound"
+        ],
+        "author": {
+            "_id": "63652a9fe3fcbf87f4d90208",
+            "email": "john@doe.io",
+            "role": "user",
+            "full_name": "john doe"
+        },
+        "state": "draft",
+        "read_count": 0,
+        "body": "Denote simple fat denied add worthy little use. As some he so high down am week. Conduct esteems by cottage...",
+        "timestamp": "2022-11-04T15:06:12.028Z",
+        "authorInfo": "John Doe",
+        "reading_time": "1 mins",
+    }
+]
 ```
 
 <!-- NA HERE YOU DEY, YOU DEY WRITE THE FIELDS WEY PLAUSIBLE, COPY FROM GITHUB, AND ALSO CORRECT SIGNUP USER WEY DEY SEND TOKEN -->

@@ -39,7 +39,7 @@ const auth = {
   },
 
   // GET A BLOG endpoint - No BIG need to alter this it can remain constant.
-  getABlogID: '63652d587aa3ed6f5c8ac4af',
+  getABlogID: '63682c95181a7e95b085b1dd',
 
   // for testing the "UPDATE MY BLOGS" & "DELETE MY BLOGS" api endpoints, appending this ID into the available field completes the endpoints' of both URL with an ID.
   blogToUpdateAndDeleteId:
@@ -47,9 +47,9 @@ const auth = {
 
   // options of ID to choose from - take ID from below and fill it into the field.
   blogToUpdateAndDeleteIdOptions: [
-    { John: '63652b80e3fcbf87f4d90219' },
-    { jane: '63652db17aa3ed6f5c8ac4bb' },
-    { Markings: '636529efac49d32e1b20ce8f' },
+    { John: '636825ac6dff6e551c232745' },
+    { jane: '63682be6181a7e95b085b1d4' },
+    { Markings: '63682f89c847e07ab0c2a245' },
   ],
 
   // ********  ATTENTION! ATTENTION!! ATTENTION!!! **********//

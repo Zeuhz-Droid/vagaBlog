@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const User = require('../models/userModel');
 
 const blogSchema = new mongoose.Schema({
   title: {

@@ -10,7 +10,6 @@ class APIQueryFeatures {
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(lte|lt|gte|gt)\b/, (match) => `$${match}`);
     this.query = this.query.find(JSON.parse(queryStr));
-
     return this;
   }
 
@@ -27,16 +26,11 @@ class APIQueryFeatures {
     const newObj = {};
     Object.keys(this.queryString).forEach((field) => {
       if (allowedFields.includes(field)) {
-        if (this.queryString[field] == 'author') {
-          newObj[field] = this.queryString;
-        }
-        if (this.queryString[field] == 'tags') {
-          newObj[field] = { $elemMatch: this.queryString.tags };
-        } else if (this.queryString[field]) {
+        if (field != 'author') {
           newObj[field] = {
             $regex: new RegExp('^' + this.queryString[field] + '.*', 'i'),
           };
-        }
+        } else newObj[field] = this.queryString[field];
       }
     });
     this.query = this.query.find(newObj);

@@ -138,7 +138,7 @@ Success
 
 ### Get All Blogs
 
-- Route: /api/v1/blogs
+- Route: /api/v1/blogs/
 - Method: GET
 - Body:
 
@@ -147,7 +147,7 @@ Success
   - state (published)
   - page (default: 1)
   - per_page (default: 20)
-  - search by (options: tags | author | title)
+  - search by (options: tags | author (id) | title)
   - order_by (default: read_count reading_time timestamp)
   - order (options: asc | desc, default: desc)
 
@@ -395,13 +395,15 @@ Success
 
 This includes functions used to test the API routes/endpoints,
 
-- The _auth_ object is used to control the whole test functions in the apiRoutes.test.js file, READ THE COMMENTS INCLUDED IN THIS FILE FOR DETAILS ABOUT THE TEST APIROUTES FILE,
+- The _auth_ object is used to control the whole test functions in the apiRoutes.test.js file, READ THE COMMENTS INCLUDED IN THIS FILE FOR DETAILS ABOUT THE TEST FUNCTIONS IN THIS FILE, AND HOW THEY SHOULD RUN.
 
 ```JavaScript
 
 const auth = {};
 
 ```
+
+After understanding how the auth object influences the test script, fill and update the necessary fields before running the script. You can do this(run the test script) by;
 
 - change into the test\integration folder using `cd <filename\child_file>` and run this code in the terminal.
 

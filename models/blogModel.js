@@ -6,14 +6,17 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please give blog title.'],
     unique: true,
+    trim: true,
   },
   description: {
     type: String,
     maxlength: 140,
+    trim: true,
   },
   tags: {
     type: Array,
     lowercase: true,
+    trim: true,
   },
   author: {
     type: mongoose.Schema.ObjectId,
@@ -45,6 +48,11 @@ const blogSchema = new mongoose.Schema({
 
 blogSchema.pre(/^find/, function (next) {
   this.populate({ path: 'author', select: 'email full_name role' });
+  next();
+});
+
+blogSchema.pre('save', function (next) {
+  this.tags = this.tags.map((tag) => tag.toLowerCase());
   next();
 });
 

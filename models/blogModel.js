@@ -19,7 +19,6 @@ const blogSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'User',
   },
-  authorInfo: String,
   state: {
     type: String,
     enum: ['draft', 'published'],
@@ -46,12 +45,6 @@ const blogSchema = new mongoose.Schema({
 
 blogSchema.pre(/^find/, function (next) {
   this.populate({ path: 'author', select: 'email full_name role' });
-  next();
-});
-
-blogSchema.pre('save', async function (next) {
-  const user = await User.findById(this.author);
-  this.authorInfo = `${user.first_name} ${user.last_name}`;
   next();
 });
 

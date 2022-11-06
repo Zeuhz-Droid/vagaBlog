@@ -10,7 +10,7 @@ const createSendToken = (user, statusCode, res) => {
   });
 
   const cookieOptions = {
-    expires: new Date(
+    expiresIn: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 60 * 60 * 1000
     ),
     httpOnly: true,

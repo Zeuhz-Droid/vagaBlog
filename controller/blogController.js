@@ -33,7 +33,7 @@ exports.getAllBlogs = catchAsync(async (req, res, next) => {
     .filter('page', 'sort')
     .sort()
     .paginate()
-    .search('title', 'tags');
+    .search('title', 'tags', 'author');
 
   let blogs = await features.query;
 

@@ -45,7 +45,7 @@ This is an API for a Blogging App.
 | id         | string    | required                                         |
 | first_name | string    | required                                         |
 | last_name  | string    | required                                         |
-| full_name  | string    | optional                                         |
+| username   | string    | optional                                         |
 | email      | string    | required                                         |
 | password   | string    | required                                         |
 | role       | string    | optional, default: user, enum: ['user', 'admin'] |
@@ -74,9 +74,9 @@ This is an API for a Blogging App.
 ```JavaScript
 {
     "first_name":"John",
-    "last_name":"Dickson",
-    "email":"dickson@yahoo.com",
-    "password": "diskcon627",
+    "last_name":"Doe",
+    "email":"johndoe@yahoo.com",
+    "password": "johndoepassword",
     "role": "user"
 }
 ```
@@ -92,10 +92,10 @@ Success
         "user": {
             "first_name": "John",
             "last_name": "Dickson",
-            "email": "dickson@yahoo.com",
+            "email":"johndoe@yahoo.com",
             "role": "user",
-            "_id": "63652ebfb1dca37cdb7f5f0a",
-            "full_name": "john dickson",
+            "_id": "63652a9fe3fcbf87f4d90208",
+            "username": "john_doe",
         }
     }
 }
@@ -111,8 +111,8 @@ Success
 
 ```JavaScript
 {
-  "email": "dickson@yahoo.com",
-  "password": 'diskcon627',
+  "email":"johndoe@yahoo.com",
+  "password": "johndoepassword",
 }
 ```
 
@@ -127,10 +127,10 @@ Success
     "data": {
         "user": {
             "first_name": "John",
-            "last_name": "Dickson",
-            "email": "dickson@yahoo.com",
+            "last_name": "Doe",
+            "email": "johndoe@yahoo.com",
             "role": "user",
-            "full_name": "john dickson",
+            "username": "john_doe",
         }
     }
 }
@@ -159,30 +159,26 @@ Success
 {
     "status": "success",
     "results": 4,
+    "totalPages": 1,
+    "currentPage": 1,
     "data": {
       "blogs": [
             {Object 1},
-            {
-            "_id": "63652d587aa3ed6f5c8ac4af",
-            "title": "Saponification: Production of Soap",
-            "description": "Production of benzene from the mixture of H2, CH4 and toluene",
-            "tags": [
-                "chemistry",
-                "organic compound",
-                "chemical compound"
-            ],
-            "author": {
-                "_id": "63652c017aa3ed6f5c8ac4a5",
-                "email": "jane@doe.io",
-                "role": "user",
-                "full_name": "jane doe"
-            },
-            "state": "published",
-            "read_count": 5,
-            "body": "Saponification is a process that involves the conversion of fat, oil, or lipid, into soap and...",
-            "timestamp": "2022-11-04T15:12:10.960Z",
-            "authorInfo": "Jane Doe",
-            "reading_time": "2 mins",
+             {
+                "_id": "63682894a76c94cc97dbc93d",
+                "title": "Function of words",
+                "description": "The function of words in our everyday lives and career.",
+                "tags": ["words", "text", "learning"],
+                "author": {
+                    "_id": "63652a9fe3fcbf87f4d90208",
+                    "username": "john_doe"
+                },
+                "state": "published",
+                "read_count": 0,
+                "body": "If the word kerning is kerned poorly, it kind of looks like learning - which is appropriate because both are importantA tagline for an airline: Take the High RoadI'm in a band that does Metallica covers with our private parts...",
+                "timestamp": "2022-11-06T21:26:57.010Z",
+                "reading_time": "2 mins",
+                "__v": 0
             },
             {Object 3},
             {Object 4},
@@ -218,15 +214,12 @@ Success
         "tags": ["Artificial Intelligence","soft AI","hard AI"],
         "author": {
             "_id": "63652a9fe3fcbf87f4d90208",
-            "email": "john@doe.io",
-            "role": "user",
-            "full_name": "john doe"
+            "username": "john_doe",
         },
         "state": "published",
         "read_count": 1,
         "body": "Denote simple fat denied add worthy little use. As some he so high down am week...",
         "timestamp": "2022-11-04T15:06:12.028Z",
-        "authorInfo": "John Doe",
         "reading_time": "1 mins",
       }
     },
@@ -300,7 +293,6 @@ Success
             "body": "Lorem Ipsum comes from a latin text written in 45BC by Roman statesman, lawyer, scholar...",
             "timestamp": "2022-11-04T15:39:14.470Z",
             "_id": "6365328c8ffc71a75f0fa9d3",
-            "authorInfo": "John Dickson",
             "reading_time": "3 mins",
         }
     }
@@ -329,6 +321,8 @@ Success
 {
     "status": 'success',
     "results": 4,
+    "totalPages": 1,
+    "currentPage": 1,
     "data": {
         "blogs": {
             {Object 1},
@@ -351,7 +345,6 @@ Success
 {
     "state" : "published",
     "title" : "Piano: Instrument of geniuses",
-
 }
 ```
 
@@ -376,17 +369,15 @@ Success
         "_id": "63652b80e3fcbf87f4d90219",
         "title": "Piano: Instrument of geniuses",
         "description": "A big part of wood making is the art of using a nails is getting set up with the basics that involve the partitioning...",
-        "tags": ["music", "piano","instrument", "sound"],
+        "tags": ["music", "piano", "instrument", "sound"],
         "author": {
-            "email": "john@doe.io",
-            "role": "user",
-            "full_name": "john doe"
+            "_id": "63652a9fe3fcbf87f4d90208",
+            "username": "john_doe"
         },
         "state": "published",
         "read_count": 0,
         "body": "Denote simple fat denied add worthy little use. As some he so high down am week. Conduct esteems by cottage...",
         "timestamp": "2022-11-04T15:06:12.028Z",
-        "authorInfo": "John Doe",
         "reading_time": "1 mins",
       }
     },

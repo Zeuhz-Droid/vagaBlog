@@ -46,7 +46,7 @@ const blogSchema = new mongoose.Schema({
 });
 
 blogSchema.pre(/^find/, function (next) {
-  this.populate({ path: 'author', select: 'email full_name role' });
+  this.populate({ path: 'author', select: 'username' });
   next();
 });
 

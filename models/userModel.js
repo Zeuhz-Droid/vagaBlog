@@ -13,10 +13,9 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Last name is required'],
     trim: true,
   },
-  full_name: {
+  username: {
     type: String,
     trim: true,
-    lowercase: true,
   },
   email: {
     type: String,
@@ -45,7 +44,12 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.pre('save', function (next) {
-  this.full_name = `${this.first_name} ${this.last_name}`;
+  if (this.username) return next();
+  this.username =
+    `${this.first_name}`.toLowerCase() +
+    '_' +
+    `${this.last_name}`.toLowerCase();
+
   next();
 });
 

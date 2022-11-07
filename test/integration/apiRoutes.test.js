@@ -103,7 +103,7 @@ describe('user routes', () => {
   });
 
   it('update user', async () => {
-    const user = { role: admin };
+    const user = { role: 'admin' };
     const res = await supertest(app)
       .post(`api/v1/users/${auth.anyId}`)
       .set('Authorization', `Bearer ${auth.token}`)

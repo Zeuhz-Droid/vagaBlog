@@ -51,6 +51,7 @@ exports.logIn = async (req, res, next) => {
 };
 
 exports.signUp = async (req, res, next) => {
+  req.user.password = undefined;
   res.status(201).json({
     status: 'success',
     data: {

@@ -102,6 +102,17 @@ describe('user routes', () => {
     expect(Array.isArray(res.body.data.users)).toBe(true);
   });
 
+  it('update user', async () => {
+    const user = { role: admin };
+    const res = await supertest(app)
+      .post(`api/v1/users/${auth.anyId}`)
+      .set('Authorization', `Bearer ${auth.token}`)
+      .send(user);
+
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.data.user.role).toBe(user.role);
+  });
+
   it('delete any blog', async () => {
     const res = await supertest(app)
       .delete(`/api/v1/blogs/${auth.anyId}`)

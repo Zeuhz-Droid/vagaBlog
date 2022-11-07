@@ -37,9 +37,14 @@ exports.getAllBlogs = catchAsync(async (req, res, next) => {
 
   let blogs = await features.query;
 
+  const totalPages = Math.ceil(blogs.length / 20);
+  const currentPage = req.query.page || 1;
+
   res.status(200).json({
     status: 'success',
     results: blogs.length,
+    totalPages,
+    currentPage,
     data: {
       blogs,
     },
@@ -109,9 +114,14 @@ exports.getMyBlogs = catchAsync(async (req, res, next) => {
 
   if (!userBlogs) next(new Error('You have no published blogs'));
 
+  const totalPages = Math.ceil(userBlogs.length / 20);
+  const currentPage = req.query.page || 1;
+
   res.status(200).json({
     status: 'success',
     results: userBlogs.length,
+    totalPages,
+    currentPage,
     data: {
       blogs: userBlogs,
     },

@@ -20,4 +20,12 @@ router
     userController.getAllUsers
   );
 
+router
+  .route('/:id')
+  .post(
+    passport.authenticate('jwt', { session: false }),
+    authController.restrictTo('admin'),
+    userController.updateUser
+  );
+
 module.exports = router;

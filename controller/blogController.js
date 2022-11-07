@@ -79,7 +79,9 @@ exports.getBlog = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteBlog = catchAsync(async (req, res, next) => {
-  const blog = await Blog.findByIdAndDelete(req.params.id);
+  const blog = await Blog.findByIdAndDelete(req.params.id).where({
+    state: 'published',
+  });
 
   if (!blog) {
     return next(new Error('No blog Found with this id'));

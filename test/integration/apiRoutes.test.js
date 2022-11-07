@@ -28,8 +28,9 @@ const auth = {
     { email: 'markings@outlook.io', password: 'yingyang44' },
   ],
 
-  // any users ID , this will be consumed by an endpoint available for only admins to delete any user's blog (on grounds of policy violation)
-  anyId: 'fill an users ID here',
+  // any blogs ID - This will be consumed by an endpoint available for only admins to delete any user's blog (on grounds of policy violation)
+  anyId: 'fill an blog ID here', //*(e.g '63682b0d181a7e95b085b1cd)*/
+
   // CREATE A BLOG endpoint - You can fill out all fields as you please, put the ones with (!important) tags has to be different everytime you run the script/file
   createABlog: {
     title: 'Removing Dirt from the Enviroment',

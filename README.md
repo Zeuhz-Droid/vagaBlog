@@ -234,6 +234,33 @@ Success
 }
 ```
 
+### Delete A Blog
+
+- Route: /api/v1/blogs/:id
+- Method: DELETE
+- Body:
+
+- Header:
+
+  - Authorization: Bearer {(admin) token}
+
+- Query params:
+
+  - search by (id)
+  - state (options: published)
+
+- Responses
+
+Success
+
+```JavaScript
+{
+    "status": "success",
+    "data": null
+
+}
+```
+
 ### Create A Blog
 
 - Route: /api/v1/blogs/
@@ -250,7 +277,9 @@ Success
 ```
 
 - Header:
-  - Authorization: Bearer {token}
+
+  - Authorization: Bearer {(user) token}
+
 - Query params: nil
 
 - Responses

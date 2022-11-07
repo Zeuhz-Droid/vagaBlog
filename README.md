@@ -195,9 +195,8 @@ Success
 
 - Query params:
 
-  - search by (id)
+  - id
   - state (published)
-  - timestamp
 
 - Responses
 
@@ -411,6 +410,70 @@ Success
 }
 ```
 
+### Get All Users
+
+- Route: /api/v1/users/
+- Method: GET
+- Body:
+
+- Header:
+
+  - Authorization: Bearer {(admin) token}
+
+- Query params:
+
+  - page (default: 1)
+  - per_page (default: 20)
+
+- Responses
+
+Success
+
+```JavaScript
+{
+    "status": "success",
+    "results": 4,
+    "totalPages": 1,
+    "currentPage": 1,
+    "data": {
+      "blogs": [
+            {Object 1},
+            {Object 2},
+            {Object 3},
+            {Object 4},
+      ]
+    },
+}
+```
+
+### Update A User
+
+- Route: /api/v1/users/:id
+- Method: POST
+- Body:
+
+- Header:
+
+  - Authorization: Bearer {(admin) token}
+
+- Query params:
+
+  - id
+
+- Responses
+
+Success
+
+````JavaScript
+{
+    "status": "success",
+    "data": {
+      "blogs": [
+            {updated user Object},
+      ]
+    },
+}
+
 ## API TESTING
 
 This includes functions used to test the API routes/endpoints,
@@ -421,7 +484,7 @@ This includes functions used to test the API routes/endpoints,
 
 const auth = {};
 
-```
+````
 
 After understanding how the auth object influences the test script, fill and update the necessary fields before running the script. You can do this(run the test script) by;
 

@@ -37,7 +37,7 @@ const blogSchema = new mongoose.Schema({
   body: {
     type: String,
     required: [true, 'A blog must have a body.'],
-    minlength: 50,
+    minlength: 20,
   },
   timestamp: {
     type: Date,

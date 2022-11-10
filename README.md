@@ -20,12 +20,12 @@ This is an API for a Blogging App.
   - It should be filterable by state
 - Blogs created should have title, description, tags, author, timestamp, state, read_count, reading_time and body.
 - The list of blogs endpoint that can be accessed by both logged in and not logged in users should be paginated,
-  - default it to 20 blogs per page.
+  - it should be defaulted to 20 blogs per page.
   - It should also be searchable by author, title and tags.
   - It should also be orderable by read_count, reading_time and timestamp
 - When a single blog is requested, the api should return the user information(the author) with the blog. The read_count of the blog too should be updated by 1
-- Come up with any algorithm for calculating the reading_time of the blog.
-- Write tests for all endpoints
+- Should have an algorithm for calculating the reading_time of the blog.
+- Written tests for all endpoints
 
 ## Setup
 

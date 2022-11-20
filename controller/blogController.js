@@ -30,16 +30,25 @@ exports.getAllBlogs = catchAsync(async (req, res, next) => {
     Blog.find({ state: 'published' }),
     req.query
   )
-    .filter('page', 'sort')
+    .filter('page', 'sort', 'limit')
+    .search('title', 'tags', 'author')
     .sort()
-    .paginate()
-    .search('title', 'tags', 'author');
+    .paginate();
 
   let blogs = await features.query;
 
-  const totalPages = Math.ceil(
-    (await Blog.find({ state: 'published' })).length / 20
-  );
+  const blogsPerPage = req.query.limit || 20;
+
+  const featuresLength = new APIQueryFeatures(
+    Blog.find({ state: 'published' }),
+    req.query
+  )
+    .search('title', 'tags', 'author')
+    .getDocumentAmount();
+
+  const totalBlogsRequested = await featuresLength.docLength;
+
+  const totalPages = Math.ceil(totalBlogsRequested / blogsPerPage);
   const currentPage = Number(req.query.page) || 1;
 
   res.status(200).json({
@@ -116,7 +125,9 @@ exports.getMyBlogs = catchAsync(async (req, res, next) => {
 
   if (!userBlogs) next(new Error('You have no published blogs'));
 
-  const totalPages = Math.ceil((await Blog.find({ author: _id })).length / 20);
+  const userBlogsSize = req.query.limit || 20;
+
+  const totalPages = Math.ceil(userBlogs.length / userBlogsSize);
   const currentPage = Number(req.query.page) || 1;
 
   res.status(200).json({

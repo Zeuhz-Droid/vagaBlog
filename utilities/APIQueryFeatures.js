@@ -2,6 +2,7 @@ class APIQueryFeatures {
   constructor(query, queryString) {
     this.query = query;
     this.queryString = queryString;
+    this.docLength;
   }
 
   filter(...inputs) {
@@ -60,6 +61,11 @@ class APIQueryFeatures {
       this.query = this.query.sort('-read_count reading_time -timestamp');
     }
 
+    return this;
+  }
+
+  getDocumentAmount() {
+    this.docLength = this.query.countDocuments();
     return this;
   }
 }

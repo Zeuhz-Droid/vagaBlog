@@ -46,7 +46,7 @@ exports.getAllBlogs = catchAsync(async (req, res, next) => {
     .search('title', 'tags', 'author')
     .getDocumentAmount();
 
-  const totalBlogsRequested = await featuresLength.docLength;
+  const totalBlogsRequested = await featuresLength.docsLength;
 
   const totalPages = Math.ceil(totalBlogsRequested / blogsPerPage);
   const currentPage = Number(req.query.page) || 1;
@@ -136,7 +136,7 @@ exports.getMyBlogs = catchAsync(async (req, res, next) => {
     .search('state')
     .getDocumentAmount();
 
-  const userBlogsRequested = await featuresLength.docLength;
+  const userBlogsRequested = await featuresLength.docsLength;
 
   const totalPages = Math.ceil(userBlogsRequested / userBlogsSize);
   const currentPage = Number(req.query.page) || 1;

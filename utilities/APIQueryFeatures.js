@@ -2,7 +2,7 @@ class APIQueryFeatures {
   constructor(query, queryString) {
     this.query = query;
     this.queryString = queryString;
-    this.docLength;
+    this.docsLength;
   }
 
   filter(...inputs) {
@@ -65,7 +65,7 @@ class APIQueryFeatures {
   }
 
   getDocumentAmount() {
-    this.docLength = this.query.countDocuments();
+    this.docsLength = this.query.countDocuments();
     return this;
   }
 }

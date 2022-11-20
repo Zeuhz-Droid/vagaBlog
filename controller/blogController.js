@@ -118,8 +118,8 @@ exports.getMyBlogs = catchAsync(async (req, res, next) => {
     }),
     req.query
   )
-    .paginate()
-    .search('state');
+    .search('state')
+    .paginate();
 
   const userBlogs = await features.query;
 
@@ -127,7 +127,18 @@ exports.getMyBlogs = catchAsync(async (req, res, next) => {
 
   const userBlogsSize = req.query.limit || 20;
 
-  const totalPages = Math.ceil(userBlogs.length / userBlogsSize);
+  const featuresLength = new APIQueryFeatures(
+    Blog.find({
+      author: _id,
+    }),
+    req.query
+  )
+    .search('state')
+    .getDocumentAmount();
+
+  const userBlogsRequested = await featuresLength.docLength;
+
+  const totalPages = Math.ceil(userBlogsRequested / userBlogsSize);
   const currentPage = Number(req.query.page) || 1;
 
   res.status(200).json({

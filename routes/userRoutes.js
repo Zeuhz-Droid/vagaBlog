@@ -5,6 +5,7 @@ const userController = require('../controller/userController');
 
 const router = express.Router();
 
+//  consumes request from users wanting to login
 router.post('/login', authController.logIn);
 router.post(
   '/signup',
@@ -12,6 +13,7 @@ router.post(
   authController.signUp
 );
 
+//  consumes request from admin requesting for a list of users
 router
   .route('/')
   .get(
@@ -20,6 +22,7 @@ router
     userController.getAllUsers
   );
 
+//  consumes request from admin requesting for a specific user
 router
   .route('/:id')
   .post(

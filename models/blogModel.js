@@ -45,16 +45,19 @@ const blogSchema = new mongoose.Schema({
   },
 });
 
+// sends along DETAILS OF THE AUTHOR of a requested blog(s)
 blogSchema.pre(/^find/, function (next) {
   this.populate({ path: 'author', select: 'username' });
   next();
 });
 
+// saves tags in lowercase
 blogSchema.pre('save', function (next) {
   this.tags = this.tags.map((tag) => tag.toLowerCase());
   next();
 });
 
+// calculates reading_time for each blog created(saved)
 blogSchema.pre('save', function (next) {
   const avgReadingTime = 150;
   const blogWords = this.body.split(' ');

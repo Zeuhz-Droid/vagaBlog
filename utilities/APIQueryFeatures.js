@@ -5,6 +5,7 @@ class APIQueryFeatures {
     this.docsLength;
   }
 
+  // helps filter documents
   filter(...inputs) {
     const queryObj = { ...this.queryString };
     inputs.forEach((field) => delete queryObj[field]);
@@ -14,6 +15,7 @@ class APIQueryFeatures {
     return this;
   }
 
+  //  paginate the documents
   paginate() {
     const page = this.queryString.page * 1;
     const limit = this.queryString.limit * 1 || 20;
@@ -23,6 +25,7 @@ class APIQueryFeatures {
     return this;
   }
 
+  // allowes specific search in the document
   search(...allowedFields) {
     const newObj = {};
     Object.keys(this.queryString).forEach((field) => {
@@ -39,6 +42,7 @@ class APIQueryFeatures {
     return this;
   }
 
+  // allows sorting of document via fields
   sort() {
     if (this.queryString.sort) {
       const ExpectedFields = [
@@ -64,6 +68,7 @@ class APIQueryFeatures {
     return this;
   }
 
+  // helps count the available document
   getDocumentAmount() {
     this.docsLength = this.query.countDocuments();
     return this;

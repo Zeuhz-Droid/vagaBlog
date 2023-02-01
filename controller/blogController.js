@@ -2,10 +2,12 @@ const Blog = require('../models/blogModel');
 const catchAsync = require('../utilities/catchAsync');
 const APIQueryFeatures = require('../utilities/APIQueryFeatures');
 
+// increase count by one
 const increaseCount = (count) => {
   return ++count;
 };
 
+// extracts id off an incoming request param
 const extractId = (id) => `${id}`.split('"')[0];
 
 const verifyCurrentUserAction = catchAsync(async (req, res, next) => {
@@ -25,6 +27,7 @@ const verifyCurrentUserAction = catchAsync(async (req, res, next) => {
   return userBlog;
 });
 
+// fetches all blogs in the database, also helps filter, sort and paginate requests
 exports.getAllBlogs = catchAsync(async (req, res, next) => {
   const features = new APIQueryFeatures(
     Blog.find({ state: 'published' }),
@@ -62,6 +65,7 @@ exports.getAllBlogs = catchAsync(async (req, res, next) => {
   });
 });
 
+//  creates a blog for an authenticated user
 exports.createBlog = catchAsync(async (req, res, next) => {
   if (!req.body.author) req.body.author = req.user._id;
 
@@ -75,6 +79,7 @@ exports.createBlog = catchAsync(async (req, res, next) => {
   });
 });
 
+// fetches a single blog for a authenticated user
 exports.getBlog = catchAsync(async (req, res, next) => {
   const blog = await Blog.findById(req.params.id).where({ state: 'published' });
 
@@ -94,6 +99,7 @@ exports.getBlog = catchAsync(async (req, res, next) => {
   });
 });
 
+//  deletes a blog for an authenticated user
 exports.deleteBlog = catchAsync(async (req, res, next) => {
   const blog = await Blog.findByIdAndDelete(req.params.id).where({
     state: 'published',
@@ -110,6 +116,7 @@ exports.deleteBlog = catchAsync(async (req, res, next) => {
   });
 });
 
+// gets personal blogs for a specific authorised user
 exports.getMyBlogs = catchAsync(async (req, res, next) => {
   const { _id } = req.user;
   const features = new APIQueryFeatures(
@@ -152,6 +159,7 @@ exports.getMyBlogs = catchAsync(async (req, res, next) => {
   });
 });
 
+//  updates blog of a specific authorised user
 exports.updateMyBlog = catchAsync(async (req, res, next) => {
   const userBlog = await verifyCurrentUserAction(req, res, next);
   if (
@@ -177,6 +185,7 @@ exports.updateMyBlog = catchAsync(async (req, res, next) => {
   });
 });
 
+//  deletes personal blog of an authorised user
 exports.deleteMyBlog = catchAsync(async (req, res, next) => {
   const userBlog = await verifyCurrentUserAction(req, res, next);
   if (userBlog) await Blog.deleteOne({ _id: req.params.id });

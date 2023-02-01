@@ -4,6 +4,7 @@ const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const User = require('../models/userModel');
 
+// used to extract user email and password in the req object from the bearer token
 passport.use(
   new JWTStrategy(
     {
@@ -23,6 +24,7 @@ passport.use(
   )
 );
 
+// collects the user info from the extraction Strategy and addes some info to it and saves it to the database and sends user info to auth controller
 passport.use(
   'signup',
   new localStrategy(
@@ -48,6 +50,7 @@ passport.use(
   )
 );
 
+// verifies user email and password before parsing them to the passport-authenticator handler
 const authenticateUser = async (email, password, done) => {
   try {
     if (!email || !password) {

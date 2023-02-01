@@ -5,6 +5,7 @@ const authController = require('../controller/authController');
 
 const router = express.Router();
 
+// consumes request to the homepage
 router
   .route('/')
   .get(blogController.getAllBlogs)
@@ -14,6 +15,7 @@ router
     blogController.createBlog
   );
 
+// consumes requests for all personal blogs
 router
   .route('/myBlogs')
   .get(
@@ -21,6 +23,7 @@ router
     blogController.getMyBlogs
   );
 
+//  consumes requests for specific personal blogs
 router
   .route('/myBlogs/:id')
   .patch(
@@ -32,6 +35,7 @@ router
     blogController.deleteMyBlog
   );
 
+// consumes requests for specific blogs
 router
   .route('/:id')
   .get(blogController.getBlog)

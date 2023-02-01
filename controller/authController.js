@@ -2,6 +2,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+// this code creates jwt token and sends to the user to keep them logged in over a specified period time, this period should be specified in our .env file and reference here
 const createSendToken = (user, statusCode, res) => {
   const body = { _id: user._id, email: user.email };
 
@@ -31,6 +32,7 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 
+//  this authenticates user before logging them in.
 exports.logIn = async (req, res, next) => {
   passport.authenticate('login', async (err, user, info) => {
     try {
@@ -50,6 +52,7 @@ exports.logIn = async (req, res, next) => {
   })(req, res, next);
 };
 
+// this function handler allow user sign up and saves them to the database
 exports.signUp = async (req, res, next) => {
   req.user.password = undefined;
   res.status(201).json({
@@ -60,6 +63,7 @@ exports.signUp = async (req, res, next) => {
   });
 };
 
+// this function helps restrict endpoints and users from performing certain functions like fetching all users
 exports.restrictTo =
   (...roles) =>
   (req, res, next) => {

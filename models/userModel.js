@@ -37,12 +37,14 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// this code block helps hash our password before saving it
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 12);
   next();
 });
 
+// this creates a username field for the created user if not present.
 userSchema.pre('save', function (next) {
   if (this.username) return next();
   this.username =
@@ -53,6 +55,7 @@ userSchema.pre('save', function (next) {
   next();
 });
 
+// This helps compare a user's saved password with the user inputed password
 userSchema.methods.correctPassword = async function (
   testPassword,
   userPassword
